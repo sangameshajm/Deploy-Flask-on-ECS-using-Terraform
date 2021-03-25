@@ -1,0 +1,19 @@
+[
+    {
+      "name": "assignment",
+      "image": "${REPOSITORY_URL}:latest",
+      "cpu": 256,
+      "memory": 256,
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": 5000
+        }
+      ],
+      "compatibilities": [
+        "EC2"
+      ]
+    }
+]
