@@ -3,6 +3,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+
 # This method redirects users to /helloworld path.
 @app.route('/')
 def redirect_url():
@@ -15,7 +16,7 @@ def hello_world():
     timestamp = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
     if request.method == 'POST':
         name = request.form.get('name')
-        return '''<h1>Hello World {} !</h1><br>{}'''.format(name, timestamp)
+        return '''<h1>Hello World from {} !</h1><br>{}'''.format(name, timestamp)
     # otherwise handle the GET request
     return '''<form method="POST">
                    <div><label>Name: <input type="text" name="name"></label></div>
@@ -35,19 +36,19 @@ def api_hello_world():
                 try:
                     name = request_data['name']
                     if isinstance(name, str):
-                        message = "Hello World {} !".format(name)
+                        message = "Hello World from {} !".format(name)
                     elif isinstance(name, list):
                         names = ""
                         for n in name:
                             names += " " + n
-                        message = "Hello World{} !".format(names)
+                        message = "Hello World from{} !".format(names)
                     elif isinstance(name, dict):
                         names = ""
                         for n in name.keys():
                             names += " " + name[n]
-                        message = "Hello World{} !".format(names)
+                        message = "Hello World from {} !".format(names)
                     else:
-                        message = "Hello World {} !".format(name)
+                        message = "Hello World from {} !".format(name)
                     response = {'message': message, "timestamp": timestamp}
                     return jsonify(response)
                 except (KeyError, TypeError):
@@ -61,6 +62,7 @@ def api_hello_world():
         return jsonify(response)
     else:
         return abort(405)
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
